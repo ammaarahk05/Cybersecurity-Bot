@@ -347,6 +347,7 @@ namespace CyberSecurity_Bot
             return followUps.Any(f => input.IndexOf(f, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
+
         static void RespondWithFollowUp(string topic)
         {
             if (topicResponses.TryGetValue(topic, out List<string> followUps))
