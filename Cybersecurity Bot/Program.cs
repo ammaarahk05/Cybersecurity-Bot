@@ -389,47 +389,47 @@ namespace CyberSecurity_Bot
             return false;
         }
 
-        static bool TryMatchTopic(string input, out string matchedTopic) 
-{ 
-    input = input.ToLower(); 
+        static bool TryMatchTopic(string input, out string matchedTopic)
+        {
+            input = input.ToLower();
 
-    foreach (var pair in topicKeywords) 
-    { 
-        foreach (string keyword in pair.Value) 
-        { 
-            if (input.Contains(keyword.ToLower())) 
-            { 
-                matchedTopic = pair.Key; 
-                return true; 
-            } 
+            foreach (var pair in topicKeywords)
+            {
+                foreach (string keyword in pair.Value)
+                {
+                    if (input.Contains(keyword.ToLower()))
+                    {
+                        matchedTopic = pair.Key;
+                        return true;
+                    }
 
-            // Check for similar keywords (e.g., "passwords" instead of "password")
-            string[] similarKeywords = keyword.Split(' '); 
-            foreach (string similarKeyword in similarKeywords) 
-            { 
-                if (input.Contains(similarKeyword.ToLower())) 
-                { 
-                    matchedTopic = pair.Key; 
-                    return true; 
-                } 
-            } 
-        } 
-    } 
+                    // Check for similar keywords (e.g., "passwords" instead of "password")
+                    string[] similarKeywords = keyword.Split(' ');
+                    foreach (string similarKeyword in similarKeywords)
+                    {
+                        if (input.Contains(similarKeyword.ToLower()))
+                        {
+                            matchedTopic = pair.Key;
+                            return true;
+                        }
+                    }
+                }
+            }
 
-    matchedTopic = null; 
-    return false; 
-}
+            matchedTopic = null;
+            return false;
+        }
         static void DisplayAvailableTopics()
-{
-    Console.WriteLine(new string('—', 50));
-    Console.WriteLine(" You can ask about: ");
-    foreach (var topic in topicKeywords.Keys)
-    {
-        Console.WriteLine($" - {topic}");
-    }
-    Console.WriteLine(" - Or type 'exit' to quit.");
-    Console.WriteLine(new string('-', 50));
-}
+        {
+            Console.WriteLine(new string('—', 50));
+            Console.WriteLine(" You can ask about: ");
+            foreach (var topic in topicKeywords.Keys)
+            {
+                Console.WriteLine($" - {topic}");
+            }
+            Console.WriteLine(" - Or type 'exit' to quit.");
+            Console.WriteLine(new string('-', 50));
+        }
 
         static void RespondWithTopic(string topic)
         {
