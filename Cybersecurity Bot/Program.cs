@@ -233,6 +233,7 @@ namespace CyberSecurity_Bot
      "I understand—cybersecurity can feel quite frustrating sometimes. Let me help make it simpler."),
 
 
+
     (new[] { "i’m curious", "i want to know", "i’m interested in", "tell me more about" },
      "That’s a great question! Curiosity is key in learning. Let’s dive right into it, shall we?"),
 
