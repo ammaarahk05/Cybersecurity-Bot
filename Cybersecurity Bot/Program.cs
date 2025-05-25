@@ -69,6 +69,7 @@ namespace CyberSecurity_Bot
                 RespondWithSpeech($"Got it! I'll remember that your favorite topic is {favoriteTopic}.");
             }
 
+
             LoadingEffect();
             Console.ForegroundColor = ConsoleColor.Magenta;
             RespondWithSpeech($"Hi, {userName}! I'm here to help you stay safe online.\n");
