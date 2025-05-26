@@ -74,6 +74,7 @@ namespace CyberSecurity_Bot
             Console.ForegroundColor = ConsoleColor.Magenta;
             RespondWithSpeech($"Hi, {userName}! I'm here to help you stay safe online.\n");
 
+
             DisplayTipOfTheDay();
 
             Console.WriteLine(new string('—', 50));
@@ -82,6 +83,7 @@ namespace CyberSecurity_Bot
             {
                 Console.WriteLine($" - {topic}");
             }
+            Console.WriteLine(" - Type 'help' for assistance.");
             Console.WriteLine(" - Or type 'exit' to quit.");
             Console.WriteLine(new string('-', 50));
 
@@ -145,7 +147,8 @@ namespace CyberSecurity_Bot
     { "two-factor authentication", new List<string> { "two-factor", "2fa", "authentication", "verification code", "security code" } },
     { "malware protection", new List<string> { "malware", "virus", "antivirus", "malicious software", "trojan", "ransomware" } },
     { "social media", new List<string> { "social media", "facebook", "instagram", "privacy settings", "oversharing" } },
-    { "cookies", new List<string> { "cookies", "tracking", "browser cookies", "cookie settings", "web tracking" } }
+    { "cookies", new List<string> { "cookies", "tracking", "browser cookies", "cookie settings", "web tracking" } },
+     
 };
 
         static Dictionary<string, List<string>> topicResponses = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase)
@@ -219,8 +222,9 @@ namespace CyberSecurity_Bot
             "Adjust your browser settings to block third-party cookies.",
             "Cookie banners on websites let you choose what data you're okay sharing."
         }
-    }
+    },
 
+   
 };
         static List<(string[] phrases, string response)> contextualSentiments = new List<(string[], string)>
 {
@@ -285,6 +289,7 @@ namespace CyberSecurity_Bot
                     LoadingEffect();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     RespondWithSpeech(sentimentResponse);
+                    DisplayAvailableTopics(); // Display available topics after responding to the sentiment
                     return;
                 }
 
@@ -322,6 +327,14 @@ namespace CyberSecurity_Bot
                     RespondWithTopic(currentTopic);
                     return;
                 }
+
+                // Check if the user needs help
+                if (input == "help")
+                {
+                    DisplayAvailableTopics();
+                    return;
+                }
+
 
                 // General fallback response
                 if (TryGeneralResponse(input, out string generalResponse))
@@ -429,10 +442,11 @@ namespace CyberSecurity_Bot
             {
                 Console.WriteLine($" - {topic}");
             }
+            Console.WriteLine(" - Type 'help' for assistance.");
             Console.WriteLine(" - Or type 'exit' to quit.");
             Console.WriteLine(new string('-', 50));
         }
-
+        
         static void RespondWithTopic(string topic)
         {
             if (topicResponses.TryGetValue(topic, out List<string> responses))
